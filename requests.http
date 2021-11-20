@@ -1,0 +1,21 @@
+POST http://localhost:8080/sync/author
+Content-Type: text/plain
+
+sync
+
+###
+
+POST http://localhost:8080/outbox/author
+Content-Type: text/plain
+
+outbox
+
+###
+
+
+POST http://localhost:8080/direct/author
+Content-Type: text/plain
+
+direct
+
+###

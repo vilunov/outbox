@@ -1,0 +1,16 @@
+harvest:
+  baseKafkaConfig:
+    bootstrap.servers: kafka:9092
+  leaderTopic: control
+  leaderGroupID: control
+  dataSource: host=postgres port=5432 user=postgres password=postgres dbname=postgres sslmode=disable
+  outboxTable: outbox
+  limits:
+    minPollInterval: 1s
+    heartbeatTimeout: 5s
+    maxInFlightRecords: 1000
+    minMetricsInterval: 5s
+    sendConcurrency: 4
+    sendBuffer: 10
+logging:
+  level: Debug
