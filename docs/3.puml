@@ -1,0 +1,22 @@
+@startuml
+scale 2
+actor Юзер as user
+participant "Бекенд" as backend
+queue "Кафка" as kafka
+participant "Консьюмер" as consumer
+database "Постгрес" as db
+
+user -> backend: запрос
+activate backend
+backend -> backend: валидации
+backend -> kafka: сообщение
+user <- backend: ответ
+deactivate backend
+
+kafka -> consumer: получить
+activate consumer
+consumer -> db: записать
+consumer -> kafka: подтвердить
+deactivate consumer
+
+@enduml

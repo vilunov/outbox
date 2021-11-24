@@ -1,0 +1,25 @@
+@startuml
+scale 2
+actor Юзер as user
+participant "API" as api
+queue "Кафка" as kafka
+participant "Подписки" as subscriptions
+
+
+user -> api: создать чат
+activate api
+api -> kafka ++: команда на\n создание чата
+user <- api: успех
+deactivate api
+
+
+
+user -> api: отправить\nсообщение
+activate api
+api <-> subscriptions: проверить доступ
+kafka -> subscriptions --: создать подписки
+user <- api: ошибка
+deactivate api
+
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+scale 2
+actor Юзер as user
+participant Бекенд as backend
+database Постгрес as db
+
+user -> backend: запрос
+activate backend
+backend -> db: начало транзакции
+activate db
+backend <-> db: select
+backend -> db: insert
+backend -> db: конец транзакции
+deactivate db
+user <- backend: ответ
+deactivate backend
+@enduml

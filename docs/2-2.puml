@@ -1,0 +1,21 @@
+@startuml
+scale 2
+actor Юзер as user
+participant "Бекенд 1" as backend1
+database "Постгрес 1" as db1
+participant "Бекенд 2" as backend2
+database "Постгрес 2" as db2
+
+user -> backend1: запрос
+activate backend1
+backend1 -> db1: начало транзакции
+activate db1
+backend1 <-> db1: select
+backend1 -> db1: insert
+backend1 ->x backend2: POST что-то
+deactivate backend2
+backend1 -> db1: откат транзакции
+deactivate db1
+user <- backend1: ответ 503
+deactivate backend1
+@enduml
